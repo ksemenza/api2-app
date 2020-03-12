@@ -3,11 +3,11 @@ import PostEdit from "./PostEdit";
 
 const PostCard = ({ post, deletePost, editPost }) => {
   const [editing, setEditing] = useState(false);
-  const [postEdit, setPostEdit] = useState(post);
+  const [userEdit, setUserEdit] = useState(user);
   const [editMode, setEditMode] = useState(false);
 
   const handleDeleteClick = () => {
-    deletePost(post);
+    deletePost(user);
     window.location.reload();
   };
 
@@ -18,13 +18,13 @@ const PostCard = ({ post, deletePost, editPost }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    editPost(postEdit);
+    editPost(userEdit);
     setEditing(false);
-    window.location.reload();
+    // window.location.reload()
   };
 
   const handleChange = e => {
-    setPostEdit({ ...postEdit, [e.target.name]: e.target.value });
+    setUserEdit({ ...userEdit, [e.target.name]: e.target.value });
   };
 
   return (
@@ -32,8 +32,8 @@ const PostCard = ({ post, deletePost, editPost }) => {
       {/* <button onClick={handleEditClick}>{!editMode? 'Edit' : 'Cancel'}</button> */}
 
       <div>
-        <h4>{post.text}</h4>
-        <h4>{post.user_id}</h4>
+        <h4>{user.id}</h4>
+        <h4>{user.name}</h4>
 
         <button className="edit" onClick={handleEditClick}>
           Edit
@@ -42,24 +42,26 @@ const PostCard = ({ post, deletePost, editPost }) => {
           Delete
         </button>
       </div>
-      <div className="post-edit">
+      <div className="uer-edit">
         {editing && (
           <form onSubmit={handleSubmit}>
-            <h4>Editing {post.text}</h4>
-            <label htmlFor="text">Edit Entry</label>
-            <textarea
-              type="textbox"
-              className="content-text"
+            <h4>Editing {post.title}</h4>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
               name="text"
-              value={postEdit.text}
+              value={user.text}
               onChange={handleChange}
             />
 
-            {/*
-TODO Add a content field into blog site
-<label htmlFor='contents'>Contents</label>
-                <textarea type='textbox' name='contents' className='content-text' value={postEdit.contents} onChange={handleChange}/>
-*/}
+            <label htmlFor="contents">Contents</label>
+            <textarea
+              type="textbox"
+              name="contents"
+              className="content-text"
+              value={postEdit.contents}
+              onChange={handleChange}
+            />
 
             <button type="submit">submit</button>
           </form>

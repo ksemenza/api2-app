@@ -1,15 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const axiosAuth = () => {
+  const API_URL = `https://safe-oasis-40439.herokuapp.com/`;
 
-   const API_URL = `https://safe-oasis-40439.herokuapp.com/posts`
-
-   return axios.create({
-    baseURL: `http://localhost:9000/posts`,
+  return axios.create({
+    baseURL: `${API_URL}`,
     headers: {
-       "Content-Type": "application/json"
+      "Content-Type": "application/json"
     }
   });
 };
 
-export default axiosAuth
+export default axiosAuth;
